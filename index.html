@@ -11,7 +11,7 @@
     <body>
         <h3> Shoppoing List </h3> 
         <!-- Trigger the modal with a button -->
-        <button type="button" name="show-modal-btn" class="btn btn-info btn-lg" id="show-modal-btn">Add product</button>
+        <button type="button" name="show-modal-btn" class="show-modal-btn" id="show-modal-btn">Add product</button>
 
         <!-- Modal -->
         <div id="product-modal" class="modal fade" role="dialog">
@@ -30,22 +30,21 @@
                         <p>Prodcut ID: <input type="text" class= "input-field" id="product-id" value=""></p>
                         <p>Price (NTD): <input type="text" id="product-price" value=""></p>
                         <p>Category: <input type="text" id="product-category" value=""></p>
-                        <!-- button -->
-                        <button type="button" id="submit-btn">Submit</button>
-                        <button type="button" id="add-products-btn">Add Products</button>
                     </div>
-                    </form>
                     <div class="modal-footer">
+                        <!-- button -->
+                        <button type="button" id="submit-btn">Save changes</button>
+                        <!-- <button type="button" id="add-products-btn">Add Products</button> -->
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>
         
 
-        <ul id="list">
+        <ul id="unorder-list">
         </ul> 
-        
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

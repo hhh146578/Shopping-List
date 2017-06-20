@@ -4,57 +4,87 @@ $(document).ready(function(){ // make sure this function has read the whole html
 	// so that we can save a lot of time to find this id and then transfer to the jQ object
 	var $showModalButton = $( "#show-modal-btn");
 	var $submitButton = $( "#submit-btn" );
-	var $addProductsButton = $("#add-products-btn");
+	// var $addProductsButton = $("#add-products-btn");
 
 	var $modalForm = $('#modal-form');
 	var $productModal = $("#product-modal");
 
-	$showModalButton.click(function(){
+	$showModalButton.on( "click", function(){
+		$modalForm[0].reset();
 		$productModal.modal('show');
 	})
-	
-	$productModal.on('show.bs.modal', function (event) {
+
+	// $productModal.on('show.bs.modal', function (event) {
+	// 	$modalForm[0].reset();
+	// 	// console.log(event);
+	// 	// addProductsButton.on( "click", "", function() {
+	// 	// 		$modalForm[0].reset();
+	// 	// })
+	// })
+
+	var count = 0;
+	var $unorderlist = $("#unorder-list");	
+	var deleBtn;
+	var editBtn;
+	$submitButton.on( "click",function(){
+		count = count + 1;
+		var flag = true;
+		var $list = $("<li id = " + count + ">");
+		var $input =  $("#modal-form input[type=text]").val();
+		$("#modal-form input[type=text]").each(function(){  //use 2 selector in jQuery
+ 				var $input = $(this); 
+				// if($this!==null && )
+				$list.append($input.val()+" ");
+		});
+		// $("#remove-button").click(function(){
+  		//	 	alert ('button clicked');
+		// });
+		deleBtn = document.createElement("BUTTON"); // button element
+		deleBtn.type = "button";
+		deleBtn.value = "delete";
+		deleBtn.id = "delete-button";
+		deleBtn.className = "js-dele-btn";
+
+		editBtn = document.createElement("BUTTON"); // button element
+		editBtn.type = "button";
+		editBtn.value = "edit";
+		editBtn.id = "edit-button";
+		editBtn.className = "js-edit-btn";
+		// if(          )
+		$list.append(editBtn);
+		$list.append(deleBtn);
+
+
+		$list.append("</li>");
+		$unorderlist.append($list);
 		$modalForm[0].reset();
-		// console.log(event.relatedTarget);
-		// addProductsButton.on( "click", "", function() {
-		// 		$modalForm[0].reset();
-		// })
+	});
+
+	$editBtn = $("#edit-button");
+
+
+	$unorderlist.on( "click", ".delete-button", function(){
+		$(this).closest('li').remove();
 	})
 
-	// var json = { items: ['item 1', 'item 2', 'item 3'] };
-	// $(json.items).each(function(index, item) {
-	//     ul.append(
-	//         $(document.createElement('li')).text(item)
-	//     );
-	// });
-
-
-	$submitButton.click(function(){
-		// var data = modalForm.seriz
-		// var u = $("input[type=text]").val();
-		// console.log(u);
-		// console.log("clieck");
-		// console.log($modalForm.serialize());
-		// productModal.modal('show');
-		var $input =  $("#modal-form input[type=text]").val()
-
-		console.log("input" + $input);
-
-		var count;
-		var jsonObj;
-		var $ul = $("<ul>").appendTo('body');
+	// we have to bind to its parent or something that will not change!
+	$unorderlist.on( "click", ".js-edit-btn", function(){
+		$modalForm[0].reset();
+		// $editObject = $(this).closest('li');
+		// console.log("$editObject " + $editObject);
+		// console.log("$editObject val" + $editObject[0].val());
+		$editObject = $(this).closest('li');
+		console.log("id :" + $editObject.find("#product-id").val());
 		$("#modal-form input[type=text]").each(function(){  //use 2 selector in jQuery
- 				var input = $(this); 
-				console.log(input.val());
-				 jsonObj[data[i].id] = data[i].name;
+ 			$(this).val("example"); 
 		});
-	});
-	$productModal.modal('show');
+		$productModal.modal('show');
+	})
 
+	// $productModal.modal('show');
 	// TODO
 	// edit button 
 	// delete button
-
 });
 
 //-------------------------------------------------
