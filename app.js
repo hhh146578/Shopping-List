@@ -2,24 +2,58 @@
 $(document).ready(function(){ // make sure this function has read the whole html
 	// use variables to store the $() objects
 	// so that we can save a lot of time to find this id and then transfer to the jQ object
-	var showModalButton = $( "#show-modal-btn");
-	var submitButton = $( "#submit-btn" );
-	var addProductsButton = $("#add-products-btn");
+	var $showModalButton = $( "#show-modal-btn");
+	var $submitButton = $( "#submit-btn" );
+	var $addProductsButton = $("#add-products-btn");
 
-	var modalForm = $('#modal-form');
-	var productModal = $("#product-modal");
+	var $modalForm = $('#modal-form');
+	var $productModal = $("#product-modal");
 
-	showModalButton.click(function(){
-		productModal.modal('show');
+	$showModalButton.click(function(){
+		$productModal.modal('show');
 	})
-	productModal.on('show.bs.modal', function (event) {
-	// 	// console.log(event.relatedTarget);
-	// 	// addProductsButton.on( "click", "", function() {
-			modalForm[0].reset();
-	// 	// })
+	
+	$productModal.on('show.bs.modal', function (event) {
+		$modalForm[0].reset();
+		// console.log(event.relatedTarget);
+		// addProductsButton.on( "click", "", function() {
+		// 		$modalForm[0].reset();
+		// })
 	})
 
-	// productModal.modal('show');
+	// var json = { items: ['item 1', 'item 2', 'item 3'] };
+	// $(json.items).each(function(index, item) {
+	//     ul.append(
+	//         $(document.createElement('li')).text(item)
+	//     );
+	// });
+
+
+	$submitButton.click(function(){
+		// var data = modalForm.seriz
+		// var u = $("input[type=text]").val();
+		// console.log(u);
+		// console.log("clieck");
+		// console.log($modalForm.serialize());
+		// productModal.modal('show');
+		var $input =  $("#modal-form input[type=text]").val()
+
+		console.log("input" + $input);
+
+		var count;
+		var jsonObj;
+		var $ul = $("<ul>").appendTo('body');
+		$("#modal-form input[type=text]").each(function(){  //use 2 selector in jQuery
+ 				var input = $(this); 
+				console.log(input.val());
+				 jsonObj[data[i].id] = data[i].name;
+		});
+	});
+	$productModal.modal('show');
+
+	// TODO
+	// edit button 
+	// delete button
 
 });
 
