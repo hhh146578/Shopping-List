@@ -43,6 +43,35 @@
         </div>
         
 
+        <!-- Modal Edit-->
+        <div id="edit-product-modal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Edit product</h4>
+                    </div>
+
+                    <form id="edit-modal-form">
+                    <div class="modal-body">
+                        <!-- input -->
+                        <p>Prodcut Name: <input type="text" class= "input-field" id="edit-product-name" value=""></p>
+                        <p>Prodcut ID: <input type="text" class= "input-field" id="edit-product-id" value=""></p>
+                        <p>Price (NTD): <input type="text" id="edit-product-price" value=""></p>
+                        <p>Category: <input type="text" id="edit-product-category" value=""></p>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- button -->
+                        <button type="button" id="edit-btn">Update</button>
+                        <!-- <button type="button" id="add-products-btn">Add Products</button> -->
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <ul id="unorder-list">
         </ul> 
         

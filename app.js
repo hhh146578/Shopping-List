@@ -3,42 +3,39 @@ $(document).ready(function(){ // make sure this function has read the whole html
 	// use variables to store the $() objects
 	// so that we can save a lot of time to find this id and then transfer to the jQ object
 	var $showModalButton = $( "#show-modal-btn");
-	var $submitButton = $( "#submit-btn" );
 	// var $addProductsButton = $("#add-products-btn");
 
 	var $modalForm = $('#modal-form');
 	var $productModal = $("#product-modal");
-
-	$showModalButton.on( "click", function(){
-		$modalForm[0].reset();
-		$productModal.modal('show');
-	})
-
-	// $productModal.on('show.bs.modal', function (event) {
-	// 	$modalForm[0].reset();
-	// 	// console.log(event);
-	// 	// addProductsButton.on( "click", "", function() {
-	// 	// 		$modalForm[0].reset();
-	// 	// })
-	// })
+	var $submitButton = $( "#submit-btn" );
+	
+	// use another form for edit part
+	var $editModalForm = $('#edit-modal-form');
+	var $editProductModal = $("#edit-product-modal");
+	var $updateButton = $( "#edit-btn" );
 
 	var count = 0;
 	var $unorderlist = $("#unorder-list");	
 	var deleBtn;
 	var editBtn;
+
+	//MAIN PAGE SHOW MODAL
+	$showModalButton.on( "click", function(){
+		$modalForm[0].reset();
+		$productModal.modal('show');
+	})
+
+	//ADD ITEM
 	$submitButton.on( "click",function(){
 		count = count + 1;
 		var flag = true;
 		var $list = $("<li id = " + count + ">");
-		var $input =  $("#modal-form input[type=text]").val();
-		$("#modal-form input[type=text]").each(function(){  //use 2 selector in jQuery
+		var $input =  $("#modal-form  input[type=text]").val();
+		$("#modal-form  input[type=text]").each(function(){  //use 2 selector in jQuery
  				var $input = $(this); 
 				// if($this!==null && )
 				$list.append($input.val()+" ");
 		});
-		// $("#remove-button").click(function(){
-  		//	 	alert ('button clicked');
-		// });
 		deleBtn = document.createElement("BUTTON"); // button element
 		deleBtn.type = "button";
 		deleBtn.value = "delete";
@@ -50,37 +47,57 @@ $(document).ready(function(){ // make sure this function has read the whole html
 		editBtn.value = "edit";
 		editBtn.id = "edit-button";
 		editBtn.className = "js-edit-btn";
-		// if(          )
+		// if(content is empty then don't add Btn)
 		$list.append(editBtn);
 		$list.append(deleBtn);
 
 
 		$list.append("</li>");
 		$unorderlist.append($list);
-		$modalForm[0].reset();
+		$productModal.modal('hide');
 	});
+
+
 
 	$editBtn = $("#edit-button");
 
-
+	//DELETE
 	$unorderlist.on( "click", ".js-dele-btn", function(){
 		$(this).closest('li').remove();
 	})
 
+	//EDIT
 	// we have to bind to its parent or something that will not change!
 	$unorderlist.on( "click", ".js-edit-btn", function(){
-		$modalForm[0].reset();
+		$editModalForm[0].reset();
+		// should retrieve the data from the list
+		// and fill out in the form
+
 		// $editObject = $(this).closest('li');
 		// console.log("$editObject " + $editObject);
 		// console.log("$editObject val" + $editObject[0].val());
 		$editObject = $(this).closest('li');
-		$(this).closest('ul').css('background-color', 'red');
-		console.log("id :" + $editObject.find("#product-id").val());
+		console.log($editObject.children);
+		$(this).closest('li').css('background-color', 'red');
+		
+		for (i = 0; i < $editObject.length; i++) {
+		    $editObject[i].style.backgroundColor = "red";
+		}
+
+		console.log($editObject);
+		// console.log("id :" + $editObject.find("#product-id").val());
 		$("#modal-form input[type=text]").each(function(){  //use 2 selector in jQuery
  			$(this).val("example"); 
 		});
-		$productModal.modal('show');
+		$editProductModal.modal('show');
 	})
+
+	//UPDATE
+	$updateButton.on( "click",function(){
+
+		// find list change list content
+		$editProductModal.modal('hide');
+	});
 
 	// $productModal.modal('show');
 	// TODO
