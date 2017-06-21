@@ -63,7 +63,7 @@ $(document).ready(function(){ // make sure this function has read the whole html
 	$editBtn = $("#edit-button");
 
 
-	$unorderlist.on( "click", ".delete-button", function(){
+	$unorderlist.on( "click", ".js-dele-btn", function(){
 		$(this).closest('li').remove();
 	})
 
@@ -74,6 +74,7 @@ $(document).ready(function(){ // make sure this function has read the whole html
 		// console.log("$editObject " + $editObject);
 		// console.log("$editObject val" + $editObject[0].val());
 		$editObject = $(this).closest('li');
+		$(this).closest('ul').css('background-color', 'red');
 		console.log("id :" + $editObject.find("#product-id").val());
 		$("#modal-form input[type=text]").each(function(){  //use 2 selector in jQuery
  			$(this).val("example"); 
