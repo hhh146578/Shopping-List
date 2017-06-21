@@ -5,7 +5,7 @@ $(document).ready(function(){ // make sure this function has read the whole html
 	var $showModalButton = $( "#show-modal-btn");
 	// var $addProductsButton = $("#add-products-btn");
 
-	var $modalForm = $('#modal-form');
+	var $modalForm = $("#modal-form");
 	var $productModal = $("#product-modal");
 	var $submitButton = $( "#submit-btn" );
 	
@@ -24,13 +24,17 @@ $(document).ready(function(){ // make sure this function has read the whole html
 		$modalForm[0].reset();
 		$productModal.modal('show');
 	})
+	
+	$productModal.on( 'shown.bs.modal', function () {
+    	$("input[type=text]:first").focus();
+    });
 
 	//ADD ITEM
 	$submitButton.on( "click",function(){
 		count = count + 1;
 		var flag = true;
-		var $list = $("<li id = " + count + ">");
-		var $input =  $("#modal-form  input[type=text]").val();
+		var $list = $("<li data-id = " + count + ">");
+		// var $input =  $("#modal-form  input[type=text]").val();
 		$("#modal-form  input[type=text]").each(function(){  //use 2 selector in jQuery
  				var $input = $(this); 
 				// if($this!==null && )
@@ -41,16 +45,18 @@ $(document).ready(function(){ // make sure this function has read the whole html
 		deleBtn.value = "delete";
 		deleBtn.id = "delete-button";
 		deleBtn.className = "js-dele-btn";
+		$(deleBtn).html('Delete');
 
 		editBtn = document.createElement("BUTTON"); // button element
 		editBtn.type = "button";
 		editBtn.value = "edit";
 		editBtn.id = "edit-button";
 		editBtn.className = "js-edit-btn";
+		$(editBtn).html('Edit');
+		
 		// if(content is empty then don't add Btn)
 		$list.append(editBtn);
 		$list.append(deleBtn);
-
 
 		$list.append("</li>");
 		$unorderlist.append($list);
@@ -72,19 +78,14 @@ $(document).ready(function(){ // make sure this function has read the whole html
 		$editModalForm[0].reset();
 		// should retrieve the data from the list
 		// and fill out in the form
+		$(this).prev().css( "background-color", "red" );	
+		console.log("this: "+ $(this).closest("li").find(".input-field").value);
 
-		// $editObject = $(this).closest('li');
-		// console.log("$editObject " + $editObject);
-		// console.log("$editObject val" + $editObject[0].val());
-		$editObject = $(this).closest('li');
-		console.log($editObject.children);
-		$(this).closest('li').css('background-color', 'red');
-		
-		for (i = 0; i < $editObject.length; i++) {
-		    $editObject[i].style.backgroundColor = "red";
-		}
+		// $editObject = $(this).parent();
+		// console.log($editObject)
+		// console.log($editObject.parents().find("#edit-product-price").val());
 
-		console.log($editObject);
+		// console.log($editObject);
 		// console.log("id :" + $editObject.find("#product-id").val());
 		$("#modal-form input[type=text]").each(function(){  //use 2 selector in jQuery
  			$(this).val("example"); 
@@ -94,8 +95,12 @@ $(document).ready(function(){ // make sure this function has read the whole html
 
 	//UPDATE
 	$updateButton.on( "click",function(){
-
-		// find list change list content
+		// var $input =  $("#edit-modal-form  input[type=text]").val();
+		$("#edit modal-form  input[type=text]").each(function(){  //use 2 selector in jQuery
+ 				var $input = $(this); 
+				// if($this!==null && )
+				$list.append($input.val()+" ");
+		});
 		$editProductModal.modal('hide');
 	});
 
