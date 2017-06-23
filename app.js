@@ -1,15 +1,15 @@
 $(document).ready(function(){ // make sure this function has read the whole html
 	// use variables to store the $() objects
 	// so that we can save a lot of time to find this id and then transfer to the jQ object
-	var $showModalButton = $( "#show-modal-btn"); // add product in main page
+	var $showModalButton = $( "#show-modal-btn"); // add product button (navbar)in main page
 	var $productModal = $("#product-modal");
 	var $modalForm = $("#modal-form");
 	
-	var $submitButton = $( "#submit-btn" ); // add product in pop out modal form
-	var $toggleEditButton = $( "#toggle-edit" ); //show edit column or not 
+	var $submitButton = $("#submit-btn"); // add product button in pop out modal form
+	var $toggleEditButton = $("#toggle-edit"); //show edit column or not 
 	
-	var $editIcon = $( "#edit-icon" );
-	var $deleteIcon = $( "#delete-icon" );
+	var $editIcon = $("#edit-icon");
+	var $deleteIcon = $("#delete-icon");
 	
 	var editing = false;
 	var counter = 0;
