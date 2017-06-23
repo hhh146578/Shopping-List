@@ -80,7 +80,6 @@ $(document).ready(function(){ // make sure this function has read the whole html
 		var i = 0;
 		$("#modal-form input[type=text]").each(function(){
 	    	arr[i] = $(this).val();
-	    	console.log(arr[i]);
 	    	i = i + 1;
 		})
 
