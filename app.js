@@ -1,54 +1,56 @@
-
 $(document).ready(function(){ // make sure this function has read the whole html
 	// use variables to store the $() objects
 	// so that we can save a lot of time to find this id and then transfer to the jQ object
-	var $showModalButton = $( "#show-modal-btn");
-	// var $addProductsButton = $("#add-products-btn");
-
-	var $modalForm = $("#modal-form");
+	var $showModalButton = $( "#show-modal-btn"); // add product in main page
 	var $productModal = $("#product-modal");
-	var $submitButton = $( "#submit-btn" );
-	var $toggleEditButton = $( "#toggle-edit" );
+	var $modalForm = $("#modal-form");
+	
+	var $submitButton = $( "#submit-btn" ); // add product in pop out modal form
+	var $toggleEditButton = $( "#toggle-edit" ); //show edit column or not 
+	
 	var $editIcon = $( "#edit-icon" );
 	var $deleteIcon = $( "#delete-icon" );
+	
 	var editing = false;
 	var counter = 0;
 	var helpFindRow = 0;
+
+	// after modal shows up, let the curson automatically appear in the first textbox
 	$productModal.on('shown.bs.modal', function () {
 		$("#product-name").focus();
     });
 
-	//MAIN PAGE SHOW MODAL
+	//main page: add product button in Navbar 
 	$showModalButton.on( "click", function(){
 		$modalForm[0].reset();
 		$("#product-modal .modal-title").html("Add a product");
 		$("#product-modal button[type=submit]").html("Add product");
-		// $productModal.html("");
-		// $productModal.modal('show');
 	});
 	
+	//show edit column or not 
 	$toggleEditButton.on('click', function() {
-		if(editing === true){ // strict equal
+		if(editing === true){ 
 			// hide it
 			$(".edit-actions").addClass('hidden');
 			$(this).html("Edit");
+			// reset editing variable
 			editing = false;
 		}else{ 
 			// show up
 			$(".edit-actions").removeClass('hidden');
 			$(this).html("Done");
+			// reset editing variable
 			editing = true;
 		}
 	});
 
-	// add product
+	// add product in pop out modal form
 	$submitButton.on( "click", function(){
 		if($(this).html()==="Add product"){
 			helpAddTable();
 		}
 		if($(this).html()==="Save changes"){
 			helpEditTable();
-			console.log("rowID:" + helpFindRow);
 		}		
 		$productModal.modal('hide');
 	});
@@ -62,7 +64,7 @@ $(document).ready(function(){ // make sure this function has read the whole html
 	    	$data = $data + "<td data-id="+ data_id +">" + $value + "</td>";
 			data_id = data_id + 1;
 		})
-		if(editing === true){ // strict equal
+		if(editing === true){ 
 			// show up
 			$data = $data + '<td class="edit-actions"><button id="edit-icon" type="button" data-toggle="modal" data-target="#product-modal" class="btn btn-success btn-xs class-edit-icon">  <span class="glyphicon glyphicon-edit"></span></button><button id="delete-icon" type="button" class="btn btn-danger btn-xs class-delete-icon"><span class="glyphicon glyphicon-remove" > </span></button></td></tr>';
 		}else{ 
@@ -81,29 +83,17 @@ $(document).ready(function(){ // make sure this function has read the whole html
 	    	console.log(arr[i]);
 	    	i = i + 1;
 		})
+
 		i = 0;
 		var temp =  "tr[row-id=" + helpFindRow + "]";
-		// console.log(	$(temp).find("td").html());
-		console.log($(temp).children('td'));
 		$(temp).children('td').each(function(){
-	        // arr[i] = ($(this).html());
-	        // i = i + 1;
-	        // if($(this).hasClass("data-id")){
-		        console.log($(this).html());
-		        $(this).html(arr[i]);
+	            $(this).html(arr[i]);
 		        i = i + 1;
-		    // }
-		    console.log("get it?");
-	        // console.log("edit table : "+ $(this).html());
-	    });
+	   });
 	}
+
 	//(dynamically) edit
 	$(".table").on( "click", ".class-edit-icon", function(){
-		// console.log("------------------edit-----------------------");
-		// console.log($(this));
-		// console.log($(this).closest("tr"));
-		// console.log($(this).closest("tr").find("td"));
-		// console.log($(this).closest("input[type=text]"));
 		var arr = new Array();
 		var i = 0;
 		helpFindRow = $(this).closest('tr').attr("row-id");
@@ -116,17 +106,6 @@ $(document).ready(function(){ // make sure this function has read the whole html
 	    	$(this).val(arr[i]);
 	    	i = i + 1;
 	    });
-		// var row = $(this).closest('tr');
-		// console.log("row" + $(this).closest('tr').attr('id'));
-		// $("#modal-form input[type=text]").each(function(){
-		// 	var target_id = $(this).attr("id");
-		// 	console.log("target_id"+target_id);
-		// 	console.log("row find obj"+ row.parent().find('#' +target_id));
-	 //    	$value = row.find('#' +target_id).val();
-	 //    	console.log("value:"+ $value);
-	 //    	console.log("jQ" + $("#target_id"));
-	 //    	$(this).html($value);
-		// })
 		$("#product-modal .modal-title").html("Edit Product");
 		$("#product-modal button[type=submit]").html("Save changes");
 	});
